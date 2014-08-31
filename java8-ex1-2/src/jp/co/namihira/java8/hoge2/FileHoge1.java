@@ -1,8 +1,8 @@
 /**
  * Copyright 2014 Kohsuke Namihira All Rights Reserved.
  */
-package jp.co.namihira.java8.hoge1.foo1;
+package jp.co.namihira.java8.hoge2;
 
-public class Foo1 {
+public class FileHoge1 {
 
 }
