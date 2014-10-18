@@ -19,8 +19,7 @@ public class StreamUtils {
      *  {{1,2,3}, {4,5,6}, {7,8,9}} -> {6, 15, 24}
      * listsがnullまたは、そのサイズがnullの場合、空のリストを返却します。
      *
-     * 例外：
-     * IllegalArgumentException　- accumulatorがnullの場合。または、各要素のリストがリストの大きさと同じ大きさで生成されていない場合。
+     * @exception IllegalArgumentException accumulatorがnullの場合。または、各要素のリストがリストの大きさと同じ大きさで生成されていない場合。
      *
      * @param lists 計算するリストを含んだリスト
      * @param accumulator　各リストに実行するaccumulator
