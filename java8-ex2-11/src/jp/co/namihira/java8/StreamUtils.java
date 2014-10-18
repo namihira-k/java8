@@ -23,7 +23,7 @@ public class StreamUtils {
      *
      * @param lists 計算するリストを含んだリスト
      * @param accumulator　各リストに実行するaccumulator
-     * @return
+     * @return 結果を集約したリスト
      */
     public static <T> List<T> collect(List<List<T>> lists, final BinaryOperator<T> accumulator) {
         if (lists == null || lists.size() == 0) {
