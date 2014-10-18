@@ -15,7 +15,7 @@ import org.junit.Test;
 public class StreamUtilsTest {
 
     @Test
-    public void test_sum() {
+    public void test_collect() {
         // prepare
         List<List<Integer>> input = new ArrayList<>();
         List<Integer> data1 = Arrays.asList(1, 2, 3);
@@ -35,7 +35,7 @@ public class StreamUtilsTest {
     }
 
     @Test
-    public void test_sum_null_list() {
+    public void test_collect_null_list() {
         // prepare
         // - nothing
 
@@ -47,7 +47,7 @@ public class StreamUtilsTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void test_sum_null_accumulator() {
+    public void test_collect_null_accumulator() {
         // prepare
         List<List<Integer>> input = new ArrayList<>();
         List<Integer> data1 = Arrays.asList(1);
@@ -60,9 +60,8 @@ public class StreamUtilsTest {
         // - nothing
     }
 
-
     @Test(expected = IllegalArgumentException.class)
-    public void test_sum_illegal_list_size() {
+    public void test_collect_illegal_list_size() {
         // prepare
         List<List<Integer>> input = new ArrayList<>();
         List<Integer> data1 = Arrays.asList(1, 2, 3);
