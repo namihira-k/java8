@@ -1,4 +1,7 @@
 /**
+ * Copyright 2014 Kohsuke Namihira All Rights Reserved.
+ */
+/**
  * Q.
  * Arrays.sortメソッド内で呼び出させるコンパレータのコードは、
  * sortメソッドを呼び出したスレッドで実行されるのでしょうか？それとも、別のスレッドで実行されるでしょうか？
