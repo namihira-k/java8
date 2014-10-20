@@ -17,21 +17,19 @@ public class Main {
         // - nothing
 
         // action
-        Runnable runner = andThen(
-                    () -> System.out.println("1st Runnable run() called"),
-                    () -> System.out.println("2st Runnable run() called")
+        Runnable runner = ThreadUtils.andThen(
+                    () -> System.out.println("1st Runnable start"),
+                    () -> System.out.println("2st Runnable start")
                 );
 
         // check
-        runner.run();
-    }
-
-    private static Runnable andThen(Runnable first, Runnable second) {
-        Runnable runner = () -> {
-            first.run();
-            second.run();
-        };
-        return runner;
+        new Thread(runner).start();
+        // -> standard output
+        //   1st Runnable start
+        //   2st Runnable start
+        //    or
+        //   2st Runnable start
+        //   1st Runnable start
     }
 
 }
