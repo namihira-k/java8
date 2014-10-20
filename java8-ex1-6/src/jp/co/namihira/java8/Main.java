@@ -21,29 +21,13 @@ public class Main {
         // - nothing
 
         // action
-        new Thread(uncheck(() -> {
+        new Thread(RunnableEx.uncheck(() -> {
             System.out.println("Zzz");
             Thread.sleep(1000);
         })).start();
 
         // check
         // - checked no compile error.
-    }
-
-    public static Runnable uncheck(RunnableEx runner) {
-        Runnable runnerWrapper = () -> {
-            try {
-                runner.run();
-            } catch ( Exception e ) {
-                throw new RuntimeException(e);
-            }
-        };
-        return runnerWrapper;
-    }
-
-    @FunctionalInterface
-    private interface RunnableEx{
-        public abstract void run() throws Exception;
     }
 
 }
