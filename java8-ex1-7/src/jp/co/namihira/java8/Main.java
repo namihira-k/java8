@@ -27,9 +27,6 @@ public class Main {
         // -> standard output
         //   1st Runnable start
         //   2st Runnable start
-        //    or
-        //   2st Runnable start
-        //   1st Runnable start
     }
 
 }

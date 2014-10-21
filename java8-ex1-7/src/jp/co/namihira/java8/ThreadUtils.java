@@ -17,8 +17,8 @@ public class ThreadUtils {
      */
     public static Runnable andThen(Runnable first, Runnable second) {
         Runnable runner = () -> {
-            new Thread(first).start();
-            new Thread(second).start();
+            first.run();
+            second.run();
         };
         return runner;
     }
