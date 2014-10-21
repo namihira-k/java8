@@ -11,7 +11,6 @@
 /**
  * A.
  *　・コレクション内の特定の条件にあった値のみに処理を実行したい場合（～Stream.filter）。
- *　・
  */
 
 package jp.co.namihira.java8;
@@ -28,5 +27,7 @@ public class Main {
         // action
         // check
         names.forEachIf(System.out::println, (name) -> name.length() > 4);
+        // -> standard output
+        //  Peter
     }
 }
