@@ -28,69 +28,13 @@ public class Main {
         words.add("1234567890123");
         words.add("123456789012345");
 
-        // action
-        int result = countWordsOver12CharsactersWithParallel(words);
+        // action、check
+        int result = CollectionUtils.countWordsWithParallel(words, 12);
+        System.out.println("result countWordsWithParallel : " + result);
 
-        // check
-        System.out.println("result : " + result);
-        final int expect = countWordsOver12CharsactersWithForLoop(words);
-        if (result != expect) {
-            throw new RuntimeException("result is not correct. result : " + result);
-        }
-    }
-
-    /**
-     * 並列処理を使って、12文字以上の単語の数を返します。
-     * @param words
-     * @return
-     */
-    private static int countWordsOver12CharsactersWithParallel(List<String> words) {
-        List<Thread> threads = new ArrayList<Thread>(words.size());
-        Counter counter = new Counter();
-        for (String w : words) {
-            threads.add(new Thread(() -> {
-                if (w.length() > 12) counter.countUp();
-            }));
-        }
-
-        for (Thread t : threads) {
-            t.start();
-        }
-
-        for (Thread t : threads) {
-            try {
-                t.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        return counter.getCount();
-    }
-
-    static class Counter {
-        int count = 0;
-
-        private synchronized void countUp(){
-            count++;
-        }
-
-        private int getCount(){
-            return count;
-        }
-    }
-
-    /**
-     * forループを使って、12文字以上の単語の数を返します。
-     * @param words
-     * @return
-     */
-    private static int countWordsOver12CharsactersWithForLoop(List<String> words) {
-        int count = 0;
-        for (String w : words) {
-            if (w.length() > 12) count++;
-        }
-        return count;
+        // action、check
+        result = CollectionUtils.countWordsWithParallel(words, 12);
+        System.out.println("result countWordsWithForLoop : " + result);
     }
 
 }
