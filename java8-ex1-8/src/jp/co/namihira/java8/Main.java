@@ -32,26 +32,32 @@ public class Main {
         /*** 拡張for文 ***/
         // action
         String[] names = { "Peter", "Paul", "Mary" };
-        List<Runnable> runners = new ArrayList<Runnable>();
+        List<Runnable> runners = new ArrayList<>();
         for (String name : names)
             runners.add(() -> System.out.println(name));
 
         // check
-        runners.stream().forEach(runner -> runner.run());
-
+        runners.stream().forEach(runner -> new Thread(runner).start());
+        // -> standard output
+        //  Peter
+        //  Mary
+        //  Paul
 
         /*** for文 ***/
         // action
         String[] namesFor = { "Peter", "Paul", "Mary" };
-        List<Runnable> runnersFor = new ArrayList<Runnable>();
+        List<Runnable> runnersFor = new ArrayList<>();
         for (int i = 0; i < namesFor.length; i++) {
             int index = i;
             runnersFor.add(() -> System.out.println(namesFor[index]));
         }
 
         // check
-        runnersFor.stream().forEach(runner -> runner.run());
+        runnersFor.stream().forEach(runner -> new Thread(runner).start());
+        // -> standard output
+        //  Paul
+        //  Peter
+        //  Mary
     }
-
 
 }
