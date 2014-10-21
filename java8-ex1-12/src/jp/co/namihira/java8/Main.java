@@ -11,12 +11,13 @@
 /**
  * A.
  * Collectionインタフェースの新たなstreamメソッドが古いコードのコンパイルを失敗させるシナリオ：
- *  -> Collectionクラスを実装した既存クラスがstreamメソッドを実装していた場合、
+ *  -> Collectionクラスを実装した既存クラスが、"stream"というメソッドを実装していた場合、
  *　          戻りの型が 、Collection<E>.stream()と互換性（Stream<E>のサブクラス）/共変でないため、コンパイルエラーになる。
  *
  *　バイナリ互換性についてはどうでしょうか？JARファイルからの古いコードは、動作するでしょうか？:
  *　　-> Collenction関連については、バイナリ互換性が維持されている。動作する。
  *　　　　 ※Java8にて廃止されているAPIもあるので、それらの非互換部分については動作しない。
+ *
  *　参考：http://www.oracle.com/technetwork/jp/java/javase/overview/8-compatibility-guide-2156366-ja.html
  */
 
