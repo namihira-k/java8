@@ -21,6 +21,7 @@ public class StreamUtils {
      * 指定されたStreamが有限ストリームかどうか。
      * nullが指定された場合、falseを返します。
      * 指定したStreamは消費されます。
+     * 
      * @param stream
      * @return 有限ストリーム（上限（UpperLimit）含まない）ならtrue。無限ストリームなら、false。
      */
