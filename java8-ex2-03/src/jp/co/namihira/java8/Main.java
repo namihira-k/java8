@@ -51,7 +51,7 @@ public class Main {
         Stream<String> words = Pattern.compile(REGEX).splitAsStream(text);
         // action
         long start = System.nanoTime();
-        long result = words.filter(word -> word.length() > MIN_LENGTH_WORD).count();
+        long result = words.filter(w -> w.length() > MIN_LENGTH_WORD).count();
         long end = System.nanoTime();
 
         // check
@@ -65,7 +65,7 @@ public class Main {
         words = Pattern.compile(REGEX).splitAsStream(text).parallel();
         // action
         start = System.nanoTime();
-        result = words.filter(word -> word.length() > MIN_LENGTH_WORD).count();
+        result = words.filter(w -> w.length() > MIN_LENGTH_WORD).count();
         end = System.nanoTime();
 
         // check
