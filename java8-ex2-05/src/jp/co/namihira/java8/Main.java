@@ -29,13 +29,12 @@ public class Main {
         Set<Long> result = random.collect(Collectors.toCollection(HashSet::new));
 
         // check
-        if (result.size() != SIZE) {
-            throw new RuntimeException("don't work well");
-        } else {
+        if (result.size() == SIZE) {
             System.out.println("work well");
             System.out.println("result.size : " + result.size());
+        } else {
+            throw new RuntimeException("don't work well");
         }
     }
-
 
 }
