@@ -1,12 +1,6 @@
 /**
  * Copyright 2014 Kohsuke Namihira All Rights Reserved.
  */
-/**
- * Q.
- * Fileオブジェクトの配列が与えられたとします。その配列をソートして、ファイルの前にディレクトリが来るようにし、
- * ファイルとディレクトリのそれぞれのグループではパス名でソートされるようにしなさい。
- * Comparatorではなく、ラムダ式を使用しなさい。
- */
 
 package jp.co.namihira.java8;
 
@@ -43,7 +37,7 @@ public class FileUtilsTest {
         int cnt_files = 0;
         for (int i = cnt_dirs; i < afterSorted.length; i++) {
             if (afterSorted[i].isDirectory()) {
-                break;
+                fail("must not include dirs");
             }
             cnt_files++;
             if (i == cnt_dirs) {
