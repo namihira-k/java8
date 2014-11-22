@@ -18,8 +18,6 @@
 
 package jp.co.namihira.java8;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +52,7 @@ public class Main {
         try {
             latch.await();
         } catch (InterruptedException e) {
-            fail(e.getMessage());
+            e.printStackTrace();
         }
         System.out.println("Expect : ");
         System.out.println(expected);
