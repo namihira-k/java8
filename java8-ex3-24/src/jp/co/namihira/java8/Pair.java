@@ -18,6 +18,7 @@ public class Pair<T> {
 
     /**
      * このPairに対して、指定された関数を適用した結果から構成されるPairを返します。
+     * mapperの引数として、left値とrigth値が渡されます。（left, right）
      *
      * @param mapper 処理内容
      * @return 適用した結果から構成されるPair
