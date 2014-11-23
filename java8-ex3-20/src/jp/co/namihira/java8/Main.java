@@ -12,7 +12,7 @@ package jp.co.namihira.java8;
 import java.util.Arrays;
 import java.util.List;
 
-public class Main<T> {
+public class Main {
 
     public static void main(String[] args) {
         // prepare

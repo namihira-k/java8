@@ -24,7 +24,7 @@
 
 package jp.co.namihira.java8;
 
-public class Main<T> {
+public class Main {
 
     public static void main(String[] args) {
         // prepare
