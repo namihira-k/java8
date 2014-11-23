@@ -16,6 +16,14 @@ public class Pair<T> {
         this.right = right;
     }
 
+    /**
+     * このPairの要素に、指定された関数を適用した結果から構成されるPairを返します。
+     *
+     * @param mapper　処理内容
+     * @return 適用した結果から構成されるPair
+     *
+     * @throws IllegalArgumentException 引数がnullの場合。
+     */
     public <U> Pair<U> map(Function<? super T,? extends U> mapper) {
         if (mapper == null) {
             throw new IllegalArgumentException("mappper must not be null");
