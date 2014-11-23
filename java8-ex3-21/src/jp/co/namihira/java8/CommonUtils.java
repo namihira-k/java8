@@ -12,6 +12,15 @@ import java.util.function.Function;
 
 public class CommonUtils {
 
+    /**
+     * 指定されたfutureの要素に対して処理を追加した新規のFutureを返却します。
+     *
+     * @param future 処理対象
+     * @param function 処理内容
+     * @return 処理が追加された新規のFuture
+     *
+     * @throws IllegalArgumentException 引数のいずれかがnullの場合。
+     */
     public static <T, U> Future<U> map(Future<T> future, Function<T, U> function){
         if (future == null || function == null) {
             throw new IllegalArgumentException("args must not be null");
