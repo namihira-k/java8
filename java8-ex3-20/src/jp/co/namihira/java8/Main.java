@@ -22,7 +22,7 @@ public class Main<T> {
         List<String> input = Arrays.asList(e1, e2, e3);
 
         // action
-        List<Integer> result = CollectionUtils.map(input, (t) -> t.length());
+        List<Integer> result = CommonUtils.map(input, (t) -> t.length());
 
         // check
         System.out.println("Input(String) : ");

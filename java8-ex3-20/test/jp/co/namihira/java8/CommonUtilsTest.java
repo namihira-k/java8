@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class CollectionUtilsTest {
+public class CommonUtilsTest {
 
     @Test
     public void test_map(){
@@ -22,7 +22,7 @@ public class CollectionUtilsTest {
         List<String> list = Arrays.asList(e1, e2, e3);
 
         // action
-        List<Integer> result = CollectionUtils.map(list, (t) -> t.length());
+        List<Integer> result = CommonUtils.map(list, (t) -> t.length());
 
         // check
         assertEquals(e1.length(), result.get(0).intValue());
@@ -36,7 +36,7 @@ public class CollectionUtilsTest {
         List<String> list = Arrays.asList();
 
         // action
-        List<Integer> result = CollectionUtils.map(list, (t) -> t.length());
+        List<Integer> result = CommonUtils.map(list, (t) -> t.length());
 
         // check
         assertEquals(0, result.size());
@@ -49,7 +49,7 @@ public class CollectionUtilsTest {
         // - nothing
 
         // action
-        CollectionUtils.map(null, (t) -> "hoge");
+        CommonUtils.map(null, (t) -> "hoge");
 
         // check
         // - throw Exception
@@ -64,7 +64,7 @@ public class CollectionUtilsTest {
         List<String> list = Arrays.asList(e1, e2, e3);
 
         // action
-        CollectionUtils.map(list, null);
+        CommonUtils.map(list, null);
 
         // check
         // - throw Exception

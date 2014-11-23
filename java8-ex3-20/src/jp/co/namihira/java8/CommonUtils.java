@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class CollectionUtils {
+public class CommonUtils {
 
     /**
      * 指定されたListの各要素に対してfを適用した結果のListを返します。
