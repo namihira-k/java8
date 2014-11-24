@@ -27,6 +27,20 @@ public class GreetingTest {
     }
 
     @Test
+    public void test_set_textProperty_get() {
+        // prepare
+        final String str = "hoge";
+        Greeting greeting = new Greeting();
+
+        // action
+        greeting.setText(str);
+        StringProperty property = greeting.textProperty();
+
+        // check
+        assertEquals(str, property.get());
+    }
+
+    @Test
     public void test_textProperty_set_get() {
         // prepare
         final String str = "hoge";

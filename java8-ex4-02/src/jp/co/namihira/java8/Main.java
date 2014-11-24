@@ -15,6 +15,7 @@
 package jp.co.namihira.java8;
 
 import javafx.application.Application;
+import javafx.beans.property.StringProperty;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -26,13 +27,16 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         // prepare
-        // - nothing
+        final String str = "hoge";
+        Greeting greeting = new Greeting();
 
         // action
-        // - nothing
+        greeting.setText(str);
+        StringProperty property = greeting.textProperty();
 
         // check
-        // - nothing
+        System.out.println("Expect : " + str);
+        System.out.println("Result : " + property.get());
     }
 
 }
