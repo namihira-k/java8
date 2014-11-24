@@ -12,7 +12,9 @@
  * - FXML記法で設定する。
  */
 
-package jp.co.namihira.java8;import java.io.IOException;
+package jp.co.namihira.java8;
+
+import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
