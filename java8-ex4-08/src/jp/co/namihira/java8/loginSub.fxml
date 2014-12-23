@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import fred.*?>
+<?import javafx.scene.control.TextField?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10"
+	fx:controller="jp.co.namihira.java8.LoginSubController">
+	<TextField fx:id="username" text="namihira"
+			GridPane.columnIndex="1"
+			GridPane.rowIndex="0" />
+	<PasswordField fx:id="password" text="namihira"
+			GridPane.columnIndex="1"
+			GridPane.rowIndex="1" />
+	<Button fx:id="okButton" text="Ok" />
+</GridPane>
+
+<!--  Copyright 2014 Kohsuke Namihira All Rights Reserved. -->

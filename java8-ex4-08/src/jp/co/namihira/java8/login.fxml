@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import fred.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10"
+	fx:controller="jp.co.namihira.java8.LoginController">
+	<fx:include fx:id="loginSub" source="loginSub.fxml"/>
+</GridPane>
+
+<!--  Copyright 2014 Kohsuke Namihira All Rights Reserved. -->
