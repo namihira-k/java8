@@ -19,8 +19,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Cal {
 
@@ -43,42 +41,25 @@ public class Cal {
         final LocalDate firstDay = LocalDate.of(year, month, 1);
         final LocalDate lastDay = firstDay.with(TemporalAdjusters.lastDayOfMonth());
 
-        final List<LocalDate> days = new ArrayList<>(lastDay.getDayOfMonth());
-        final DayOfWeek dayOfWeekOnFirstDay = firstDay.getDayOfWeek();
-        final LocalDate padding = null;
-        for (int i = 0; i < dayOfWeekOnFirstDay.getValue() - 1; i++) {
-            days.add(padding);
-        }
-
-        for (int i = firstDay.getDayOfMonth(); i <= lastDay.getDayOfMonth(); i++) {
-            days.add(LocalDate.of(year, month, i));
-        }
-
-        print(days);
-    }
-
-    private static void print(final List<LocalDate> days) {
-        final String space = " ";
         final String padding = "  ";
+        final String space = " ";
 
-        days.stream().forEachOrdered(day -> {
-            if (day == null) {
-                System.out.print(padding);
-                System.out.print(space);
-                return;
-            }
+        for (int i = 0; i < firstDay.getDayOfWeek().getValue() - 1; i++) {
+            System.out.print(padding + space);
+        }
 
+        LocalDate day = firstDay;
+        while (!day.isAfter(lastDay)) {
             if (day.getDayOfMonth() < 10) {
-                System.out.print(" " + day.getDayOfMonth());
+                System.out.print(" " + day.getDayOfMonth() + space);
             } else {
-                System.out.print(day.getDayOfMonth());
+                System.out.print(day.getDayOfMonth() + space);
             }
-            System.out.print(space);
-
             if (day.getDayOfWeek() == DayOfWeek.SUNDAY) {
                 System.out.println("");
             }
-        });
+            day = day.plusDays(1);
+        }
     }
 
 }
