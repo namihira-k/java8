@@ -44,7 +44,6 @@ public class Main {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                return true;
             });
         }).start();
 
@@ -56,7 +55,6 @@ public class Main {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            return true;
         });
 
         // check

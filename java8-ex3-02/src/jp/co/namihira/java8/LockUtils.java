@@ -5,30 +5,30 @@
 package jp.co.namihira.java8;
 
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Supplier;
 
 public class LockUtils {
 
     /**
-     * 指定されたLockを利用し、指定されたactionSupplierを排他的に実行します。
+     * 指定されたLockを利用し、指定されたrunnableを排他的に実行します。
      *
      * @exception IllegalArgumentException 引数のいずれかがnullの場合。
      *
      * @param lock ロック
-     * @param actionSupplier　処理
+     * @param runnable　処理
+     *
      */
-    public static <T> void withLock(final ReentrantLock lock, final Supplier<T> actionSupplier) {
+    public static <T> void withLock(final ReentrantLock lock, final Runnable runnable) {
         if (lock == null) {
             throw new IllegalArgumentException("lock must not be null");
         }
 
-        if (actionSupplier == null) {
+        if (runnable == null) {
             throw new IllegalArgumentException("actionSupplier must not be null");
         }
 
         lock.lock();
         try {
-            actionSupplier.get();
+            runnable.run();
         } finally {
             lock.unlock();
         }

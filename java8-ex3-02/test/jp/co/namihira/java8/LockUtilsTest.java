@@ -25,7 +25,6 @@ public class LockUtilsTest {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-                return true;
             });
         }).start();
 
@@ -37,7 +36,6 @@ public class LockUtilsTest {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            return true;
         });
 
         // check
@@ -52,7 +50,6 @@ public class LockUtilsTest {
         // action
         LockUtils.withLock(null, () -> {
             System.out.println("actionSupplier called");
-            return true;
         });
 
         // check
@@ -70,6 +67,5 @@ public class LockUtilsTest {
         // check
         // - checked throw Exception
     }
-
 
 }
