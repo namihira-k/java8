@@ -30,6 +30,10 @@ public class ComparatorUtils {
             throw new IllegalArgumentException("fieldname must not be null");
         }
 
+        if (fieldname.length == 0) {
+            throw new IllegalArgumentException("fieldname must not be empty");
+        }
+
         Comparator<Object> comp = (Object obj1, Object obj2) -> {
             if (obj1 == null || obj2 == null) {
                 throw new IllegalArgumentException("args must not be null");

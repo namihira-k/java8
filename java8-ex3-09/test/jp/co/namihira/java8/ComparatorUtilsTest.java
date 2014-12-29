@@ -6,6 +6,7 @@ package jp.co.namihira.java8;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import org.junit.Test;
@@ -75,6 +76,18 @@ public class ComparatorUtilsTest {
 
         // action
         ComparatorUtils.lexicographicComparator(null);
+
+        // check
+        // - checked Exception
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void test_lexicographicComparator_empty_fieldname(){
+        // prepare
+        // - nothing
+
+        // action
+        ComparatorUtils.lexicographicComparator(new ArrayList<>().toArray(new String[0]));
 
         // check
         // - checked Exception
