@@ -50,14 +50,14 @@ public class ComparatorUtils {
                 throw new RuntimeException(e);
             }
 
-            final int RESULT = name1.compareTo((T) name2);
-            if (RESULT == 0) {
+            final int result = name1.compareTo((T) name2);
+            if (result == 0) {
                 List<String> list = new LinkedList<>(Arrays.asList(fieldname));
                 list.remove(0);
                 return (list.size() == 0) ?
-                        RESULT : lexicographicComparator(list.toArray(new String[0])).compare(obj1, obj2);
+                        result : lexicographicComparator(list.toArray(new String[0])).compare(obj1, obj2);
             } else {
-                return RESULT;
+                return result;
             }
         };
 
