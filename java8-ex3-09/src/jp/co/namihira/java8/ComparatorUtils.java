@@ -46,7 +46,7 @@ public class ComparatorUtils {
                 name2 = (Comparable<T>) getAccessibleField(obj2, fieldname[0]);
             } catch (IllegalArgumentException | NoSuchFieldException  e) {
                 throw new IllegalArgumentException(e);
-            } catch (IllegalAccessException | SecurityException e) {
+            } catch (ReflectiveOperationException e) {
                 throw new RuntimeException(e);
             }
 
