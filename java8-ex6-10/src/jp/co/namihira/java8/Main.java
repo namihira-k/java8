@@ -39,6 +39,9 @@
 
 package jp.co.namihira.java8;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ForkJoinPool;
@@ -48,7 +51,8 @@ public class Main {
 
     public static void main(String[] args) {
         // prepare
-        final String url = "http://horstmann.com";
+        final String url = getURLFromConsole();
+//        final String url = "http://horstmann.com";
 
         // action
         final CompletableFuture<List<String>> links =
@@ -59,5 +63,15 @@ public class Main {
         links.thenAccept(System.out::println);
         ForkJoinPool.commonPool().awaitQuiescence(10, TimeUnit.SECONDS);
     }
+
+    private static String getURLFromConsole() {
+        try {
+           System.out.print("Input URL > ");
+           BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+           return br.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+   }
 
 }
