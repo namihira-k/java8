@@ -1,4 +1,7 @@
 /*
+ * Copyright 2015 Kohsuke Namihira All Rights Reserved.
+ */
+/*
  * Q.
  * 全ての環境変数の値を表示するスクリプトを書きなさい。
  */

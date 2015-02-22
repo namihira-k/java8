@@ -1,4 +1,7 @@
 /*
+ * Copyright 2015 Kohsuke Namihira All Rights Reserved.
+ */
+/*
  * Q.
  * 一連のシェルコマンドを受け取り、1つのコマンドの出力を次のコマンドの入力として接続し、
  * 最後の出力を返すJavaScriptのpipe関数を書きなさい。

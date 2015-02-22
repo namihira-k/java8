@@ -1,4 +1,7 @@
 /*
+ * Copyright 2015 Kohsuke Namihira All Rights Reserved.
+ */
+/*
  * Q.
  * 172ページの7.10節「Javaクラスの拡張とJavaインターフェースの実装」の終わりでは、
  * addに対するすべての呼び出しをログに記憶するようにArrayListを拡張する方法を説明しました。
