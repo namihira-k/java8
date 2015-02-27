@@ -26,7 +26,7 @@ public class DateUtilsTest {
         assertEquals(input.plusDays(2), result);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void test_next_null(){
         // prepare
         // 2014-12-13(Sat)
