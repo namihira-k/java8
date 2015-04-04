@@ -11,6 +11,9 @@
  * を呼び出し、次にconnection.connect()とconnection.getInputStream()を呼び出しなさい。
  *
  */
+/* A.
+ * - 参考 : http://x68000.q-e-d.net/~68user/net/http-auth-1.html
+ */
 
 package jp.co.namihira.java8;
 
