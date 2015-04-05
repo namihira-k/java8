@@ -9,6 +9,14 @@
  * パラメータと戻り値は整数だと想定しなさい。
  *
  */
+/*
+ * A.
+ * - log
+ * - params expected    result
+ * public static long jp.co.namihira.java8.CommonUtils.factorial(int)
+ * 4   24  24
+ * 0   1   1
+ */
 
 package jp.co.namihira.java8;
 
