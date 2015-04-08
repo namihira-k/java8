@@ -20,31 +20,35 @@ import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UncheckedIOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args){
+        try {
+            excute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void excute() throws Exception{
         final String classPath = getClassPath();
 
         Scanner in = null;
         try {
             in = new Scanner(Paths.get(classPath + "/in.txt"));
         } catch (IOException e) {
-            throw new UncheckedIOException(e);
+            throw e;
         }
 
         PrintWriter out = null;
         try {
             out = new PrintWriter(classPath + "/out.txt");
         } catch (FileNotFoundException e) {
-            try {
-                close(in);
-            } catch (IOException e1) {
-                throw new UncheckedIOException(e1);
-            }
+            close(in);
+            throw e;
         }
 
         try {
@@ -52,13 +56,9 @@ public class Main {
                 out.println(in.next().toLowerCase());
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw e;
         } finally {
-            try {
-                close(in, out);
-            } catch (IOException e) {
-                throw new UncheckedIOException(e);
-            }
+            close(in, out);
         }
     }
 
