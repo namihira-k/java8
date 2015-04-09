@@ -39,6 +39,12 @@ public class Main {
 
     /**
      * FIXME
+     *
+     * min seed : 258079733
+     * 0.6377114653006212
+     * 0.818933505835191
+     * 0.6247993079588533
+     *
      */
     public static void main(String[] args) {
         // setup
@@ -55,22 +61,11 @@ public class Main {
         seeds.sequential().forEachOrdered(s -> {return;});
 
         // check
+        System.out.println("min seed : " + min.get());
         final Random generator = new Random(min.get() ^ m);
-        System.out.println("seed : " + (min.get() ^ m));
         final Stream<Double> randoms = Stream.generate(() -> generator.nextDouble()).limit(COUNT_NEXT_DOUBLE);
 
-//        int cnt = 0;
-//        double tmp = 0.0;
-//        do {
-//            tmp = generator.nextDouble();
-//            if (Double.compare(tmp, 0.0d) == 0) {
-//                System.out.println("hit : " + cnt);
-//            }
-//            cnt++;
-//        } while (Double.compare(tmp, 0.0d) != 0);
-
         randoms.sequential().forEachOrdered(r -> {return;});
-        System.out.println(generator.nextDouble());
         System.out.println(generator.nextDouble());
         System.out.println(generator.nextDouble());
         System.out.println(generator.nextDouble());

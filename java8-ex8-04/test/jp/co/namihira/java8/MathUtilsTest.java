@@ -8,7 +8,6 @@ import org.junit.Test;
 
 public class MathUtilsTest {
 
-
     @Test
     public void test_prev(){
         // setup
@@ -18,6 +17,5 @@ public class MathUtilsTest {
 
         // check
     }
-
 
 }
