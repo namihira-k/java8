@@ -15,16 +15,14 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
-    private double diffX = 0;
-    private double diffY = 0;
-
-    private final String KEY_X = "X";
-    private final String KEY_Y = "Y";
-
-    private final String KEY_WIDTH = "width";
-    private final String KEY_HEIGHT = "height";
+    private double diffX = 0.0;
+    private double diffY = 0.0;
 
     private final static Preferences cache = Preferences.userNodeForPackage(Main.class);
+    private final String KEY_X = "X";
+    private final String KEY_Y = "Y";
+    private final String KEY_WIDTH = "width";
+    private final String KEY_HEIGHT = "height";
 
     public static void main(String[] args) {
         launch(args);
@@ -32,15 +30,21 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        initialize(stage);
+        loadCache(stage);
 
         Label timeLabel = new Label();
-
         final ClockService clock = new ClockService();
         clock.bindMessage(timeLabel.textProperty());
         clock.restart();
 
         PropertyDialog.bindFont(timeLabel.fontProperty());
+        PropertyDialog.bindFontColor(timeLabel.textFillProperty());
+        PropertyDialog.bindBackground(timeLabel.backgroundProperty());
+        timeLabel.fontProperty().addListener((font) -> {
+            timeLabel.autosize();
+            stage.setWidth(timeLabel.getWidth() * 1.1);
+            stage.setHeight(timeLabel.getHeight() * 1.1);
+        });
 
         Scene scene = new Scene(timeLabel);
 
@@ -62,34 +66,27 @@ public class Main extends Application {
             }
         });
 
-        timeLabel.fontProperty().addListener((font) -> {
-            timeLabel.autosize();
-            stage.setWidth(timeLabel.getWidth() * 1.1);
-            stage.setHeight(timeLabel.getHeight() * 1.1);
+        PropertyDialog.setExitActionLinstener(() -> {
+            saveCache(stage);
         });
 
-        PropertyDialog.bindFontColor(timeLabel.textFillProperty());
-        PropertyDialog.bindBackground(timeLabel.backgroundProperty());
-
-        // 枠なしの制御
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
-
         stage.show();
-
-        PropertyDialog.setExitActionLinstener(() -> {
-            cache.putDouble(KEY_X, stage.getX());
-            cache.putDouble(KEY_Y, stage.getY());
-            cache.putDouble(KEY_WIDTH, stage.getWidth());
-            cache.putDouble(KEY_HEIGHT, stage.getHeight());
-        });
     }
 
-    private void initialize(final Stage stage){
+    private void loadCache(final Stage stage){
         stage.setX(cache.getDouble(KEY_X, 100));
         stage.setY(cache.getDouble(KEY_Y, 100));
         stage.setWidth(cache.getDouble(KEY_WIDTH, 100));
         stage.setHeight(cache.getDouble(KEY_HEIGHT, 100));
+    }
+
+    private void saveCache(final Stage stage){
+        cache.putDouble(KEY_X, stage.getX());
+        cache.putDouble(KEY_Y, stage.getY());
+        cache.putDouble(KEY_WIDTH, stage.getWidth());
+        cache.putDouble(KEY_HEIGHT, stage.getHeight());
     }
 
 }

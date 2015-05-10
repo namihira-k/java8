@@ -43,7 +43,7 @@ public class PropertyDialog {
             Font.getFontNames()));
 
     private final static ComboBox<Double> fontSizeBox = new ComboBox<>(FXCollections.observableArrayList(
-            10.0, 50.0, 100.0));
+            10.0, 50.0, 100.0, 150.0));
 
     private final static ComboBox<String> fontColorBox = new ComboBox<>(FXCollections.observableArrayList(
             "Red", "Black", "Blue", "Green"));
@@ -51,102 +51,44 @@ public class PropertyDialog {
     private final static ComboBox<String> backgroundColorBox = new ComboBox<>(FXCollections.observableArrayList(
             "Red", "Black", "Blue", "Green"));
 
-    private final static String KEY_FONT_NAME = "fontName";
-    private final static String KEY_FONT_SIZE = "fontSize";
-    private final static String KEY_FONT_COLOR_R = "fontColorR";
-    private final static String KEY_FONT_COLOR_G = "fontColorG";
-    private final static String KEY_FONT_COLOR_B = "fontColorB";
-    private final static String KEY_BACKGROUND_R = "backgroundColorR";
-    private final static String KEY_BACKGROUND_G = "backgroundColorG";
-    private final static String KEY_BACKGROUND_B = "backgroundColorB";
-
     private final static Property<Font> font =  new SimpleObjectProperty<>(Font.getDefault());
     private final static Property<Color> fontColor =  new SimpleObjectProperty<>(Color.BLACK);
     private final static Property<Background> background =  new SimpleObjectProperty<>(new Background(new BackgroundFill(Color.GRAY, null, null)));
-
-    private static Font originFont = null;
-    private static Color originFontColor = null;
-    private static Background originBackground = null;
 
     private final static Button okButton = new Button(" OK ");
     private final static Button cancelButton = new Button("Cancel");
     private final static Button exitButton = new Button("アプリ終了");
 
+    private static Font originFont = null;
+    private static String originFontColor = null;
+    private static String originBackground = null;
+
     private final static Preferences cache = Preferences.userNodeForPackage(PropertyDialog.class);
+    private final static String KEY_FONT_NAME = "fontName";
+    private final static String KEY_FONT_SIZE = "fontSize";
+    private final static String KEY_FONT_COLOR = "fontColor";
+    private final static String KEY_BACKGROUND = "backgroundColor";
 
     private static Runnable exitActionLinstener;
 
-    static void bindFont(final Property<Font> propety){
-        propety.bind(font);
-    }
-
-    static void bindFontColor(final Property<Paint> propety){
-        propety.bind(fontColor);
-    }
-
-    static void bindBackground(final Property<Background> propety){
-        propety.bind(background);
-    }
-
     static {
-        initialize();
+        buildScreen();
+        buildEventHandlers();
+        loadCache();
+    }
 
+    private PropertyDialog(){
+    }
+
+    private static void buildScreen(){
         final double rem = new Text("").getLayoutBounds().getHeight();
-        // pane.setGridLinesVisible(true);
-
         pane.setHgap(0.8 * rem);
         pane.setVgap(0.8 * rem);
         pane.setPadding(new Insets(0.8 * rem));
 
-        okButton.setOnAction(event -> close());
-        cancelButton.setOnAction(event -> {
-            font.setValue(originFont);
-            fontColor.setValue(originFontColor);
-            background.setValue(originBackground);
-            close();
-        });
-        exitButton.setOnAction(event -> {
-            exitActionLinstener.run();
-            cache.put(KEY_FONT_NAME, originFont.getName());
-            cache.putDouble(KEY_FONT_SIZE, originFont.getSize());
-
-            cache.putDouble(KEY_FONT_COLOR_R, originFontColor.getRed());
-            cache.putDouble(KEY_FONT_COLOR_G, originFontColor.getGreen());
-            cache.putDouble(KEY_FONT_COLOR_B, originFontColor.getBlue());
-
-            cache.putDouble(KEY_BACKGROUND_R, ((Color)background.getValue().getFills().get(0).getFill()).getRed());
-            cache.putDouble(KEY_BACKGROUND_G, ((Color)background.getValue().getFills().get(0).getFill()).getGreen());
-            cache.putDouble(KEY_BACKGROUND_B, ((Color)background.getValue().getFills().get(0).getFill()).getBlue());
-            System.exit(0);
-        });
-
         HBox buttons = new HBox(0.8 * rem);
         buttons.getChildren().addAll(okButton, cancelButton);
         buttons.setAlignment(Pos.CENTER_RIGHT);
-
-        fontNameBox.setValue(Font.getDefault().getName());
-        fontNameBox.setOnAction((event) -> {
-            font.setValue(new Font(fontNameBox.getValue(), fontSizeBox.getValue()));
-        });
-
-        fontSizeBox.getSelectionModel().select(1);
-        fontSizeBox.setOnAction((event) -> {
-            font.setValue(new Font(fontNameBox.getValue(), fontSizeBox.getValue()));
-        });
-
-        fontColorBox.getSelectionModel().select(1);
-        fontColorBox.setOnAction((event) -> {
-            fontColor.setValue(Color.web(fontColorBox.getValue()));
-        });
-        fontColorBox.setCellFactory((box) -> new ColorRectCell());
-        fontColorBox.setButtonCell(new ColorRectCell());
-
-        backgroundColorBox.getSelectionModel().select(1);
-        backgroundColorBox.setOnAction((event) -> {
-            background.setValue(new Background(new BackgroundFill(Color.web(backgroundColorBox.getValue()), null, null)));
-        });
-        backgroundColorBox.setCellFactory((box) -> new ColorRectCell());
-        backgroundColorBox.setButtonCell(new ColorRectCell());
 
         pane.add(fontLabel, 0, 0);
         pane.add(fontNameBox, 1, 0);
@@ -169,25 +111,67 @@ public class PropertyDialog {
         stage.initStyle(StageStyle.UNDECORATED);
     }
 
-    private PropertyDialog(){
+    private static void buildEventHandlers(){
+        okButton.setOnAction(event -> close());
+
+        cancelButton.setOnAction(event -> {
+            font.setValue(originFont);
+            fontNameBox.getSelectionModel().select(originFont.getName());
+            fontSizeBox.getSelectionModel().select(originFont.getSize());
+
+            fontColor.setValue(Color.web(originFontColor));
+            fontColorBox.getSelectionModel().select(originFontColor);
+
+            background.setValue(new Background(new BackgroundFill(Color.web(originBackground), null, null)));
+            backgroundColorBox.getSelectionModel().select(originBackground);
+
+            close();
+        });
+
+        exitButton.setOnAction(event -> {
+            exitActionLinstener.run();
+            cache.put(KEY_FONT_NAME, originFont.getName());
+            cache.putDouble(KEY_FONT_SIZE, originFont.getSize());
+            cache.put(KEY_FONT_COLOR, originFontColor);
+            cache.put(KEY_BACKGROUND, originBackground);
+            System.exit(0);
+        });
+
+        fontNameBox.setOnAction((event) -> {
+            font.setValue(new Font(fontNameBox.getValue(), fontSizeBox.getValue()));
+        });
+
+        fontSizeBox.setOnAction((event) -> {
+            font.setValue(new Font(fontNameBox.getValue(), fontSizeBox.getValue()));
+        });
+
+        fontColorBox.setOnAction((event) -> {
+            fontColor.setValue(Color.web(fontColorBox.getValue()));
+        });
+        fontColorBox.setCellFactory((box) -> new ColorRectCell());
+        fontColorBox.setButtonCell(new ColorRectCell());
+
+        backgroundColorBox.setOnAction((event) -> {
+            background.setValue(new Background(new BackgroundFill(Color.web(backgroundColorBox.getValue()), null, null)));
+        });
+        backgroundColorBox.setCellFactory((box) -> new ColorRectCell());
+        backgroundColorBox.setButtonCell(new ColorRectCell());
     }
 
-    private static void initialize(){
-        final String fontName = cache.get(KEY_FONT_NAME, Font.getDefault().getName());
-        final Double fontSize = cache.getDouble(KEY_FONT_SIZE, Font.getDefault().getSize());
-        font.setValue(new Font(fontName, fontSize));
+    private static void loadCache(){
+        final String cachedFontName = cache.get(KEY_FONT_NAME, Font.getDefault().getName());
+        final Double cachedFontSize = cache.getDouble(KEY_FONT_SIZE, Font.getDefault().getSize());
+        font.setValue(new Font(cachedFontName, cachedFontSize));
+        fontNameBox.getSelectionModel().select(cachedFontName);
+        fontSizeBox.getSelectionModel().select(cachedFontSize);
 
-        Double r = cache.getDouble(KEY_FONT_COLOR_R, 1.0);
-        Double g = cache.getDouble(KEY_FONT_COLOR_G, 1.0);
-        Double b = cache.getDouble(KEY_FONT_COLOR_B, 1.0);
+        final String cachedFontColor = cache.get(KEY_FONT_COLOR, "Black");
+        fontColor.setValue(Color.web(cachedFontColor));
+        fontColorBox.getSelectionModel().select(cachedFontColor);
 
-        fontColor.setValue(Color.color(r, g, b));
-
-        r = cache.getDouble(KEY_BACKGROUND_R, 1.0);
-        g = cache.getDouble(KEY_BACKGROUND_G, 1.0);
-        b = cache.getDouble(KEY_BACKGROUND_B, 1.0);
-
-        background.setValue(new Background(new BackgroundFill(Color.color(r, g, b), null, null)));
+        final String cachedBackground = cache.get(KEY_BACKGROUND, "Black");
+        background.setValue(new Background(new BackgroundFill(Color.web(cachedBackground), null, null)));
+        backgroundColorBox.getSelectionModel().select(cachedBackground);;
     }
 
     static void show(final double x, final double y){
@@ -199,14 +183,27 @@ public class PropertyDialog {
         stage.toFront();
 
         originFont = font.getValue();
-        originFontColor = fontColor.getValue();
-        originBackground = background.getValue();
+
+        originFontColor = fontColorBox.getValue();
+        originBackground = backgroundColorBox.getValue();
     }
 
     static void close(){
         if (stage.isShowing()) {
             stage.close();
         }
+    }
+
+    static void bindFont(final Property<Font> propety){
+        propety.bind(font);
+    }
+
+    static void bindFontColor(final Property<Paint> propety){
+        propety.bind(fontColor);
+    }
+
+    static void bindBackground(final Property<Background> propety){
+        propety.bind(background);
     }
 
     static void setExitActionLinstener(final Runnable action){
