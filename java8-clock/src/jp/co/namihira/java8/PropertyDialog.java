@@ -51,10 +51,8 @@ public class PropertyDialog {
     private final static ComboBox<String> backgroundColorBox = new ComboBox<>(FXCollections.observableArrayList(
             "Red", "Black", "Blue", "Green"));
 
-    private final static String KEY_FONT = "font";
     private final static String KEY_FONT_NAME = "fontName";
     private final static String KEY_FONT_SIZE = "fontSize";
-    private final static String KEY_FONT_COLOR = "fontColor";
     private final static String KEY_FONT_COLOR_R = "fontColorR";
     private final static String KEY_FONT_COLOR_G = "fontColorG";
     private final static String KEY_FONT_COLOR_B = "fontColorB";
@@ -194,7 +192,7 @@ public class PropertyDialog {
 
     static void show(final double x, final double y){
         stage.setX(x);
-        stage.setX(y);
+        stage.setY(y);
         if (!stage.isShowing()) {
             stage.show();
         }
