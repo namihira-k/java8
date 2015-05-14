@@ -5,6 +5,7 @@
 
 # Package Files #
 *.jar
+!java8-clock.jar
 *.war
 *.ear
 
