@@ -43,13 +43,13 @@ public class PropertyDialog {
             Font.getFontNames()));
 
     private final static ComboBox<Double> fontSizeBox = new ComboBox<>(FXCollections.observableArrayList(
-            10.0, 50.0, 100.0, 150.0));
+            25.0, 50.0, 100.0, 150.0, 200.0));
 
     private final static ComboBox<String> fontColorBox = new ComboBox<>(FXCollections.observableArrayList(
-            "Red", "Black", "Blue", "Green"));
+            "Red", "Black", "white", "Blue", "Green"));
 
     private final static ComboBox<String> backgroundColorBox = new ComboBox<>(FXCollections.observableArrayList(
-            "Red", "Black", "Blue", "Green"));
+            "Red", "Black", "white", "Blue", "Green"));
 
     private final static Property<Font> font =  new SimpleObjectProperty<>(Font.getDefault());
     private final static Property<Color> fontColor =  new SimpleObjectProperty<>(Color.BLACK);
